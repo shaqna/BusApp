@@ -1,0 +1,457 @@
+{
+  "statusCode": 200,
+  "body": [
+    {
+      "busStopPoint": [
+        {
+          "latitude": 5.35645035,
+          "longitude": 100.29339821
+        },
+        {
+          "latitude": 5.35717485,
+          "longitude": 100.29343145
+        },
+        {
+          "latitude": 5.35723002,
+          "longitude": 100.29344623
+        },
+        {
+          "latitude": 5.35726312,
+          "longitude": 100.29350533
+        },
+        {
+          "latitude": 5.35723737,
+          "longitude": 100.29403354
+        },
+        {
+          "latitude": 5.35776328,
+          "longitude": 100.29406309
+        },
+        {
+          "latitude": 5.35781476,
+          "longitude": 100.29431427
+        },
+        {
+          "latitude": 5.35782212,
+          "longitude": 100.29448788
+        },
+        {
+          "latitude": 5.35782212,
+          "longitude": 100.29455067
+        },
+        {
+          "latitude": 5.35768237,
+          "longitude": 100.29488311
+        },
+        {
+          "latitude": 5.35755733,
+          "longitude": 100.29520447
+        },
+        {
+          "latitude": 5.35748745,
+          "longitude": 100.29531529
+        },
+        {
+          "latitude": 5.35735506,
+          "longitude": 100.29538916
+        },
+        {
+          "latitude": 5.3571675,
+          "longitude": 100.29539286
+        },
+        {
+          "latitude": 5.35689535,
+          "longitude": 100.29537439
+        },
+        {
+          "latitude": 5.35650552,
+          "longitude": 100.29533376
+        },
+        {
+          "latitude": 5.35611936,
+          "longitude": 100.29528204
+        },
+        {
+          "latitude": 5.35592077,
+          "longitude": 100.29514537
+        }
+      ]
+    },
+    {
+      "busStopPoint": [
+        {
+          "latitude": 5.35580308,
+          "longitude": 100.29507519
+        },
+        {
+          "latitude": 5.3551411,
+          "longitude": 100.29503087
+        },
+        {
+          "latitude": 5.35501606,
+          "longitude": 100.29705876
+        },
+        {
+          "latitude": 5.35497128,
+          "longitude": 100.29765784
+        },
+        {
+          "latitude": 5.35497969,
+          "longitude": 100.29785418
+        },
+        {
+          "latitude": 5.3549965,
+          "longitude": 100.29803996
+        }
+      ]
+    },
+    {
+      "busStopPoint": [
+        {
+          "latitude": 5.35527162,
+          "longitude": 100.30010632
+        },
+        {
+          "latitude": 5.35631839,
+          "longitude": 100.30062004
+        }
+      ]
+    },
+    {
+      "busStopPoint": [
+        {
+          "latitude": 5.35701416,
+          "longitude": 100.30096807
+        }
+      ]
+    },
+    {
+      "busStopPoint": [
+        {
+          "latitude": 5.35833406,
+          "longitude": 100.30163431
+        },
+        {
+          "latitude": 5.35864919,
+          "longitude": 100.30172271
+        },
+        {
+          "latitude": 5.35879399,
+          "longitude": 100.30173982
+        },
+        {
+          "latitude": 5.35875992,
+          "longitude": 100.30250973
+        }
+      ]
+    },
+    {
+      "busStopPoint": [
+        {
+          "latitude": 5.35873153,
+          "longitude": 100.30319695
+        },
+        {
+          "latitude": 5.35869746,
+          "longitude": 100.30340796
+        },
+        {
+          "latitude": 5.35852428,
+          "longitude": 100.30393835
+        },
+        {
+          "latitude": 5.35817791,
+          "longitude": 100.30400679
+        },
+        {
+          "latitude": 5.35803028,
+          "longitude": 100.30405526
+        }
+      ]
+    },
+    {
+      "busStopPoint": [
+        {
+          "latitude": 5.35808067,
+          "longitude": 100.30416851
+        },
+        {
+          "latitude": 5.35724669,
+          "longitude": 100.30450295
+        },
+        {
+          "latitude": 5.35725237,
+          "longitude": 100.30455428
+        },
+        {
+          "latitude": 5.3572325,
+          "longitude": 100.30467405
+        },
+        {
+          "latitude": 5.35747098,
+          "longitude": 100.30558654
+        },
+        {
+          "latitude": 5.35754479,
+          "longitude": 100.30563786
+        },
+        {
+          "latitude": 5.3575959,
+          "longitude": 100.30569204
+        },
+        {
+          "latitude": 5.35759022,
+          "longitude": 100.3058061
+        },
+        {
+          "latitude": 5.35742555,
+          "longitude": 100.3057947
+        },
+        {
+          "latitude": 5.35719275,
+          "longitude": 100.30612833
+        },
+        {
+          "latitude": 5.3571672,
+          "longitude": 100.30619676
+        },
+        {
+          "latitude": 5.35715868,
+          "longitude": 100.30636215
+        },
+        {
+          "latitude": 5.3571672,
+          "longitude": 100.30648477
+        },
+        {
+          "latitude": 5.3572325,
+          "longitude": 100.30670434
+        }
+      ]
+    },
+    {
+      "busStopPoint": [
+        {
+          "latitude": 5.3572978,
+          "longitude": 100.30694387
+        },
+        {
+          "latitude": 5.35731199,
+          "longitude": 100.30703511
+        },
+        {
+          "latitude": 5.35730347,
+          "longitude": 100.30711496
+        },
+        {
+          "latitude": 5.35725521,
+          "longitude": 100.3071948
+        },
+        {
+          "latitude": 5.35722398,
+          "longitude": 100.30722902
+        },
+        {
+          "latitude": 5.35665332,
+          "longitude": 100.3077423
+        }
+      ]
+    },
+    {
+      "busStopPoint": [
+        {
+          "latitude": 5.3564876,
+          "longitude": 100.3078602
+        },
+        {
+          "latitude": 5.35638256,
+          "longitude": 100.30790298
+        },
+        {
+          "latitude": 5.35630022,
+          "longitude": 100.30790298
+        },
+        {
+          "latitude": 5.35616111,
+          "longitude": 100.30779462
+        },
+        {
+          "latitude": 5.35565575,
+          "longitude": 100.30756935
+        },
+        {
+          "latitude": 5.35537752,
+          "longitude": 100.30744103
+        },
+        {
+          "latitude": 5.35522989,
+          "longitude": 100.30730986
+        },
+        {
+          "latitude": 5.3551504,
+          "longitude": 100.30713591
+        },
+        {
+          "latitude": 5.35509929,
+          "longitude": 100.30687643
+        }
+      ]
+    },
+    {
+      "busStopPoint": [
+        {
+          "latitude": 5.35506942,
+          "longitude": 100.30667332
+        },
+        {
+          "latitude": 5.35506942,
+          "longitude": 100.30647657
+        },
+        {
+          "latitude": 5.3550751,
+          "longitude": 100.3062684
+        },
+        {
+          "latitude": 5.35518583,
+          "longitude": 100.30589771
+        },
+        {
+          "latitude": 5.3552568,
+          "longitude": 100.30573802
+        },
+        {
+          "latitude": 5.35453851,
+          "longitude": 100.30542435
+        },
+        {
+          "latitude": 5.35450444,
+          "longitude": 100.30535591
+        },
+        {
+          "latitude": 5.35450444,
+          "longitude": 100.30527322
+        },
+        {
+          "latitude": 5.35469182,
+          "longitude": 100.30464588
+        },
+        {
+          "latitude": 5.35497006,
+          "longitude": 100.3040214
+        }
+      ]
+    },
+    {
+      "busStopPoint": [
+        {
+          "latitude": 5.35497006,
+          "longitude": 100.3040214
+        },
+        {
+          "latitude": 5.35523524,
+          "longitude": 100.30346173
+        },
+        {
+          "latitude": 5.35527089,
+          "longitude": 100.30331565
+        },
+        {
+          "latitude": 5.35525663,
+          "longitude": 100.30315096
+        },
+        {
+          "latitude": 5.35499284,
+          "longitude": 100.30296621
+        },
+        {
+          "latitude": 5.35489161,
+          "longitude": 100.30280725
+        },
+        {
+          "latitude": 5.354836,
+          "longitude": 100.30266117
+        }
+      ]
+    },
+    {
+      "busStopPoint": [
+        {
+          "latitude": 5.354836,
+          "longitude": 100.30266117
+        },
+        {
+          "latitude": 5.35468111,
+          "longitude": 100.30219384
+        },
+        {
+          "latitude": 5.35450357,
+          "longitude": 100.30169118
+        },
+        {
+          "latitude": 5.35440256,
+          "longitude": 100.30151133
+        },
+        {
+          "latitude": 5.35402453,
+          "longitude": 100.30100867
+        },
+        {
+          "latitude": 5.35485649,
+          "longitude": 100.30039995
+        }
+      ]
+    },
+    {
+      "busStopPoint": [
+        {
+          "latitude": 5.35526573,
+          "longitude": 100.30006207
+        },
+        {
+          "latitude": 5.35526573,
+          "longitude": 100.30006207
+        },
+        {
+          "latitude": 5.3549965,
+          "longitude": 100.29803996
+        },
+        {
+          "latitude": 5.35497969,
+          "longitude": 100.29785418
+        },
+        {
+          "latitude": 5.35497128,
+          "longitude": 100.29765784
+        },
+        {
+          "latitude": 5.3551411,
+          "longitude": 100.29503087
+        }
+      ]
+    },
+    {
+      "busStopPoint": [
+        {
+          "latitude": 5.35580308,
+          "longitude": 100.29507519
+        },
+        {
+          "latitude": 5.35596935,
+          "longitude": 100.2951788
+        },
+        {
+          "latitude": 5.35607375,
+          "longitude": 100.29510006
+        },
+        {
+          "latitude": 5.3561372,
+          "longitude": 100.29496411
+        },
+        {
+          "latitude": 5.35621334,
+          "longitude": 100.29338786
+        }
+      ]
+    }
+  ]
+}

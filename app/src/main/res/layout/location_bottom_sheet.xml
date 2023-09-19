@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/locationBottomSheet"
+    android:layout_width="match_parent"
+    android:layout_height="277dp"
+    android:background="@drawable/rouded_background"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <TextView
+        android:id="@+id/tvTitleYourLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inter"
+        android:text="@string/your_location"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/bgLocationInfo"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleYourLocation"
+        app:srcCompat="@drawable/location_background" />
+
+    <ImageView
+        android:id="@+id/imgPeople"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bgLocationInfo"
+        app:layout_constraintStart_toStartOf="@+id/bgLocationInfo"
+        app:layout_constraintTop_toTopOf="@+id/bgLocationInfo"
+        app:srcCompat="@drawable/people" />
+
+    <TextView
+        android:id="@+id/tvLocationName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inter_semibold"
+        android:text="Universitas Syiah Kuala"
+        app:layout_constraintStart_toEndOf="@+id/imgPeople"
+        app:layout_constraintTop_toTopOf="@+id/bgLocationInfo" />
+
+    <TextView
+        android:id="@+id/tvLocationStreet"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="4dp"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:text="@string/dummy_location"
+        android:textColor="#8DA3BB"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bgLocationInfo"
+        app:layout_constraintEnd_toEndOf="@+id/bgLocationInfo"
+        app:layout_constraintStart_toStartOf="@+id/tvLocationName"
+        app:layout_constraintTop_toBottomOf="@+id/tvLocationName" />
+
+    <Button
+        android:id="@+id/btnFindBusStop"
+        style="@style/ButtonStyle.Poppins"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="10dp"
+        android:text="@string/find_bus_stop"
+        app:layout_constraintEnd_toEndOf="@+id/bgLocationInfo"
+        app:layout_constraintStart_toStartOf="@+id/bgLocationInfo"
+        app:layout_constraintTop_toBottomOf="@+id/bgLocationInfo" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

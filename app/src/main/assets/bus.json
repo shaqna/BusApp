@@ -1,0 +1,25 @@
+{
+  "code": 200,
+  "message": "success fetch data",
+  "data": [
+    {
+      "id": "1",
+      "name": "Bus 01 - BL 0001 J",
+      "address": "C1:43:C1:7D:B3:C4",
+      "destination": "Halte Teknik",
+      "timeArrives": "5 minutes",
+      "latitude": 5.578007,
+      "longitude": 95.363926
+    },
+    {
+      "id": "2",
+      "name": "Bus 02 - BL 00002 J",
+      "address": "C8:BF:9D:4C:8E:EB",
+      "destination": "Halte Mesjid Jamik",
+      "timeArrives": "10 minutes",
+      "latitude": 5.566108,
+      "longitude": 95.366728
+    }
+  ]
+}
+

@@ -1,0 +1,17 @@
+<resources>
+    <string name="api_key">AIzaSyA4Dhn6yV5A4_mwkBhmasyrDg33Gsu92LU</string>
+
+    <string name="app_name">Bus App</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="finding_your_location">Finding Your Location</string>
+    <string name="cd_finding_your_location">Image Finding Your Location</string>
+    <string name="change">Change</string>
+    <string name="your_location">Your Location</string>
+    <string name="dummy_location">Jl. Universitas Syiah Kuala, Kecamatan Syiah Kuala, No. 123</string>
+    <string name="find_bus">Please choose your destination</string>
+    <string name="bus_stop_detail">Bus Stop</string>
+    <string name="find_bus_stop">Find Nearby Bus Stop</string>
+
+    <string name="location_rationale">We need your permission to use your location for showing nearby items</string>
+
+</resources>

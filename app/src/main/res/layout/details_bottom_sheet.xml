@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/detailsBottomSheet"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/bottom_sheet_height"
+    android:background="@drawable/rouded_background"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <ImageView
+        android:id="@+id/slideUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/remove" />
+
+    <TextView
+        android:id="@+id/tvTitleDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/inter"
+        android:text="Details"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/backBtn"
+        app:layout_constraintStart_toEndOf="@+id/backBtn"
+        app:layout_constraintTop_toTopOf="@+id/backBtn" />
+
+    <ImageButton
+        android:id="@+id/backBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_arrow_back_24" />
+
+    <ImageButton
+        android:id="@+id/imgDestinationBusStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="@+id/tvTitleDetails"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleDetails"
+        app:srcCompat="@drawable/current_location" />
+
+    <TextView
+        android:id="@+id/tvCurrentBusStopName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="32dp"
+        android:text="BHEPA"
+        android:textColor="@color/primaryColor"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imgDestinationBusStop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgDestinationBusStop"
+        app:layout_constraintTop_toTopOf="@+id/imgDestinationBusStop" />
+
+    <TextView
+        android:id="@+id/tvBusCarPlate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="PGB5641"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="@+id/tvCurrentBusStopName"
+        app:layout_constraintStart_toStartOf="@+id/tvCurrentBusStopName"
+        app:layout_constraintTop_toBottomOf="@+id/tvCurrentBusStopName" />
+
+    <TextView
+        android:id="@+id/tvArrival"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Arrive in 10 minutes"
+        app:layout_constraintEnd_toEndOf="@+id/tvBusCarPlate"
+        app:layout_constraintStart_toStartOf="@+id/tvBusCarPlate"
+        app:layout_constraintTop_toBottomOf="@+id/tvBusCarPlate" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="2dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/primaryColor"
+        app:layout_constraintEnd_toEndOf="@+id/imgDestinationBusStop"
+        app:layout_constraintStart_toStartOf="@+id/imgDestinationBusStop"
+        app:layout_constraintTop_toBottomOf="@+id/imgDestinationBusStop" />
+
+    <ImageButton
+        android:id="@+id/imgPrevBusStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="@+id/imgDestinationBusStop"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:srcCompat="@drawable/prev_location" />
+
+    <TextView
+        android:id="@+id/tvPrevBusStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DKSK"
+        android:textColor="@color/grey"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imgPrevBusStop"
+        app:layout_constraintStart_toStartOf="@+id/tvCurrentBusStopName"
+        app:layout_constraintTop_toTopOf="@+id/imgPrevBusStop" />
+
+    <TextView
+        android:id="@+id/tvLastUpdateTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="17:30 WIB"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvPrevBusStop"
+        app:layout_constraintEnd_toEndOf="@+id/tvArrival"
+        app:layout_constraintTop_toTopOf="@+id/tvPrevBusStop" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
