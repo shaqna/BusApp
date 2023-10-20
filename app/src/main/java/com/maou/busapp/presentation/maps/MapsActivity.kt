@@ -276,6 +276,14 @@ class MapsActivity : AppCompatActivity(),
                 viewModel.fetchBusStops(request)
             }
 
+            viewModel.stateProvince?.contains(Constants.State.JAWA_TIMUR)!! -> {
+                val request = BusStopListRequest(
+                    country = Constants.Country.IDN,
+                    state = Constants.State.JAWA_TIMUR
+                )
+                viewModel.fetchBusStops(request)
+            }
+
         }
     }
 
@@ -423,6 +431,17 @@ class MapsActivity : AppCompatActivity(),
                     BusEtaRequest(
                         country = Constants.Country.MY,
                         state = Constants.State.PULAU_PINANG,
+                        busStopName = busStop.busStopName
+                    )
+                viewModel.fetchBusEta(busEtaRequest)
+            }
+
+            viewModel.stateProvince?.contains(Constants.State.JAWA_TIMUR)!! -> {
+                Log.d(TAG, busStop.busStopName)
+                val busEtaRequest =
+                    BusEtaRequest(
+                        country = Constants.Country.IDN,
+                        state = Constants.State.JAWA_TIMUR,
                         busStopName = busStop.busStopName
                     )
                 viewModel.fetchBusEta(busEtaRequest)
@@ -713,6 +732,7 @@ class MapsActivity : AppCompatActivity(),
         val geocoder = Geocoder(this@MapsActivity, Locale.getDefault())
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            Log.d("Versi Android", Build.VERSION.SDK_INT.toString())
             geocoder.getFromLocation(
                 location.latitude,
                 location.longitude,
@@ -723,6 +743,7 @@ class MapsActivity : AppCompatActivity(),
                 )
             }
         } else {
+            Log.d("Versi Android", Build.VERSION.SDK_INT.toString())
             val addresses = geocoder.getFromLocation(
                 location.latitude,
                 location.longitude, 1

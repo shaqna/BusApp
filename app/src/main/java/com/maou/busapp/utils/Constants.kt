@@ -9,5 +9,6 @@ object Constants {
     object State {
         const val ACEH = "Aceh"
         const val PULAU_PINANG = "Pulau Pinang"
+        const val JAWA_TIMUR = "Jawa Timur"
     }
 }
