@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.maou.busapp.databinding.ActivityWelcomeBinding
+import com.maou.busapp.presentation.home.HomeActivity
 import com.maou.busapp.presentation.maps.MapsActivity
 
 class WelcomeActivity : AppCompatActivity() {
@@ -21,7 +22,7 @@ class WelcomeActivity : AppCompatActivity() {
 
     private fun setButtonAction() {
         binding.findBus.setOnClickListener {
-            startActivity(Intent(this@WelcomeActivity, MapsActivity::class.java))
+            startActivity(Intent(this@WelcomeActivity, HomeActivity::class.java))
         }
     }
 

@@ -18,6 +18,9 @@
         android:theme="@style/Base.Theme.BusApp"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.home.HomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.routes.RoutesActivity"
             android:exported="false" />
         <!--

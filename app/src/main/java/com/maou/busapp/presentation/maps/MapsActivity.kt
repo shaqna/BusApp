@@ -37,7 +37,6 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.maps.DirectionsApi
 import com.google.maps.GeoApiContext
@@ -50,7 +49,7 @@ import com.maou.busapp.data.source.request.BusStopListRequest
 import com.maou.busapp.databinding.ActivityMapsBinding
 import com.maou.busapp.domain.model.BusStop
 import com.maou.busapp.presentation.maps.adapters.BusEtaAdapter
-import com.maou.busapp.presentation.maps.adapters.BusStopAdapter
+import com.maou.busapp.presentation.home.BusStopAdapter
 import com.maou.busapp.presentation.maps.callback.BusBottomSheetCallback
 import com.maou.busapp.presentation.maps.callback.BusStopBottomSheetCallback
 import com.maou.busapp.presentation.maps.callback.DetailsBottomSheetCallback
@@ -131,9 +130,9 @@ class MapsActivity : AppCompatActivity(),
                 setDetailsSheetVisibility(Visibility.VISIBLE)
                 setBusSheetVisibility(Visibility.GONE)
             }
-            adjustMapPaddingToBottomSheet(
-                resources.getDimension(R.dimen.bottom_sheet_height).roundToInt()
-            )
+//            adjustMapPaddingToBottomSheet(
+//                resources.getDimension(R.dimen.bottom_sheet_height).roundToInt()
+//            )
 
             with(binding.detailsBottomSheetLayout) {
                 tvBusCarPlate.text = StringUtils.generateText("Car Plate: ${it.busCarPlate}")
@@ -187,7 +186,7 @@ class MapsActivity : AppCompatActivity(),
         toolbar.title = ""
         setSupportActionBar(toolbar)
 
-        initBottomSheet()
+        //initBottomSheet()
         initMap()
     }
 
@@ -235,11 +234,12 @@ class MapsActivity : AppCompatActivity(),
 
             initMapCamera()
             requestLocationPermissions()
-            setupBottomSheet()
+
+            //setupBottomSheet()
             observeDeviceLocation()
             observeBusStop()
-            observeBusEta()
-            setButton()
+            //observeBusEta()
+            //setButton()
         }
     }
 
@@ -486,6 +486,8 @@ class MapsActivity : AppCompatActivity(),
                     busEtaAdapter.setList(state.data)
                 }
             }
+
+            else -> {}
         }
     }
 
@@ -506,18 +508,18 @@ class MapsActivity : AppCompatActivity(),
             is BusStopUiState.Loading -> {
                 bottomSheetHelper.setBusStopSheetVisibility(Visibility.GONE)
                 bottomSheetHelper.setPlaceHolderSheetVisibility(Visibility.VISIBLE)
-                startShimmer()
+//                startShimmer()
             }
 
             is BusStopUiState.Success -> {
-                stopShimmer()
+                //stopShimmer()
                 bottomSheetHelper.apply {
                     setPlaceHolderSheetVisibility(Visibility.GONE)
                     setBusStopSheetVisibility(Visibility.VISIBLE)
                 }
-                adjustMapPaddingToBottomSheet(
-                    resources.getDimension(R.dimen.bottom_sheet_height).roundToInt()
-                )
+//                adjustMapPaddingToBottomSheet(
+//                    resources.getDimension(R.dimen.bottom_sheet_height).roundToInt()
+//                )
                 bottomSheetHelper.busStopBottomSheetBehavior.apply {
                     this?.state = BottomSheetBehavior.STATE_EXPANDED
                 }
@@ -527,6 +529,7 @@ class MapsActivity : AppCompatActivity(),
                         adapter = busStopAdapter
                         layoutManager = LinearLayoutManager(this@MapsActivity)
                     }
+                    Log.d("Bus stops", state.data.toString())
                     busStopAdapter.setList(state.data)
                     showBusStopLocation(state.data)
                 }
@@ -560,18 +563,16 @@ class MapsActivity : AppCompatActivity(),
         when (state) {
             is LocationUiState.Loading -> {
                 bottomSheetHelper.setPlaceHolderSheetVisibility(Visibility.VISIBLE)
-                startShimmer()
             }
 
             is LocationUiState.OnLocationResult -> {
-                state.location?.let {
-                    stopShimmer()
+                state.location?.let {currentLocation ->
                     bottomSheetHelper.setPlaceHolderSheetVisibility(Visibility.GONE)
                     bottomSheetHelper.setLocationSheetVisibility(Visibility.VISIBLE)
                     bottomSheetHelper.locBottomSheetBehavior.apply {
                         this?.state = BottomSheetBehavior.STATE_EXPANDED
                     }
-                    showMyLocation(it)
+                    showMyLocation(currentLocation)
                     viewModel.stopRequestLocationUpdates()
                 }
             }
@@ -580,16 +581,16 @@ class MapsActivity : AppCompatActivity(),
 
     private fun startShimmer() {
         shimmerView.startShimmer()
-        adjustMapPaddingToBottomSheet(
-            resources.getDimension(R.dimen.bottom_sheet_height).roundToInt()
-        )
+//        adjustMapPaddingToBottomSheet(
+//            resources.getDimension(R.dimen.bottom_sheet_height).roundToInt()
+//        )
     }
 
     private fun stopShimmer() {
         shimmerView.stopShimmer()
-        adjustMapPaddingToBottomSheet(
-            resources.getDimension(R.dimen.bottom_sheet_height).roundToInt()
-        )
+//        adjustMapPaddingToBottomSheet(
+//            resources.getDimension(R.dimen.bottom_sheet_height).roundToInt()
+//        )
     }
 
     private fun drawRoute(origin: LatLng, destination: LatLng) {
@@ -716,7 +717,8 @@ class MapsActivity : AppCompatActivity(),
         myLocationMarker?.remove()
         myLocation = location
 
-        val myLatLng = LatLng(location.latitude, location.longitude)
+//        val myLatLng = LatLng(location.latitude, location.longitude)
+        val myLatLng = viewModel.uskLocation
 
         mMap.apply {
             isMyLocationEnabled = true
@@ -734,8 +736,10 @@ class MapsActivity : AppCompatActivity(),
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             Log.d("Versi Android", Build.VERSION.SDK_INT.toString())
             geocoder.getFromLocation(
-                location.latitude,
-                location.longitude,
+//                location.latitude,
+//                location.longitude
+                myLatLng.latitude,
+                myLatLng.longitude,
                 1
             ) { addresses ->
                 setAddresses(
@@ -745,8 +749,10 @@ class MapsActivity : AppCompatActivity(),
         } else {
             Log.d("Versi Android", Build.VERSION.SDK_INT.toString())
             val addresses = geocoder.getFromLocation(
-                location.latitude,
-                location.longitude, 1
+//                location.latitude,
+//                location.longitude
+                myLatLng.latitude,
+                myLatLng.longitude, 1
             )
             setAddresses(addresses!![0])
         }
@@ -786,6 +792,8 @@ class MapsActivity : AppCompatActivity(),
             tvLocationName.text = city
             tvLocationStreet.text = fullAddress
             binding.tvAppBarTitle.text = StringUtils.generateText("Welcome to $city,$country")
+
+            requestBusStopByState()
         }
     }
 

@@ -1,4 +1,4 @@
-package com.maou.busapp.presentation.maps
+package com.maou.busapp.presentation.home
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -10,6 +10,7 @@ import com.maou.busapp.data.source.request.BusStopListRequest
 import com.maou.busapp.domain.model.BusStop
 import com.maou.busapp.domain.usecase.location.LocationController
 import com.maou.busapp.domain.usecase.transport.TransportUseCase
+import com.maou.busapp.presentation.maps.MapsActivity
 import com.maou.busapp.presentation.state.BusEtaUiState
 import com.maou.busapp.presentation.state.BusStopUiState
 import com.maou.busapp.presentation.state.BusUiState
@@ -23,10 +24,10 @@ import kotlinx.coroutines.launch
 import org.koin.dsl.module
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 
-class MapsViewModel(
+class HomeViewModel(
     private val locationController: LocationController,
     private val transportUseCase: TransportUseCase
-) : ViewModel() {
+): ViewModel() {
 
     private val _locationState = MutableStateFlow<LocationUiState>(LocationUiState.Loading)
     val locationState: StateFlow<LocationUiState> = _locationState
@@ -40,7 +41,6 @@ class MapsViewModel(
     private val _busEtaState = MutableStateFlow<BusEtaUiState>(BusEtaUiState.Init)
     val busEtaState: StateFlow<BusEtaUiState> get() = _busEtaState
 
-
     var busStop: BusStop? = null
     var stateProvince: String? = null
 
@@ -48,18 +48,13 @@ class MapsViewModel(
     val usmLocation = LatLng(5.356001752593852, 100.30253648752455)
     val uskLocation = LatLng(5.570408134750771, 95.3697489110843)
 
-    fun initBusStop(busStop: BusStop) {
-        this.busStop = busStop
-    }
-
-
     fun startRequestLocationUpdates() {
         Log.d(MapsActivity.TAG, "viewModel start")
         locationController.startRequestLocationUpdates()
         viewModelScope.launch {
             locationController.locationState.collectLatest {
                 Log.d(MapsActivity.TAG, "state: $it")
-                it?.let { location ->
+                it?.let {location ->
                     _locationState.value = LocationUiState.OnLocationResult(location)
                 }
             }
@@ -80,18 +75,15 @@ class MapsViewModel(
                 .onStart {
                     _busStopState.value = BusStopUiState.Loading(true)
                 }
-                .catch { e ->
+                .catch {e->
                     _busStopState.value = BusStopUiState.Loading(false)
                     _busStopState.value = BusStopUiState.Error(e.message.toString())
                 }
                 .collect { result ->
                     _busStopState.value = BusStopUiState.Loading(false)
-                    when (result) {
-                        is BaseResult.Error -> _busStopState.value =
-                            BusStopUiState.Error(result.message)
-
-                        is BaseResult.Success -> _busStopState.value =
-                            BusStopUiState.Success(result.data)
+                    when(result) {
+                        is BaseResult.Error -> _busStopState.value = BusStopUiState.Error(result.message)
+                        is BaseResult.Success -> _busStopState.value = BusStopUiState.Success(result.data)
 
                     }
                 }
@@ -104,19 +96,16 @@ class MapsViewModel(
                 .onStart {
                     _busEtaState.value = BusEtaUiState.Loading(true)
                 }
-                .catch { e ->
+                .catch { e->
                     _busEtaState.value = BusEtaUiState.Loading(false)
                     _busEtaState.value = BusEtaUiState.Error(e.message.toString())
 
                 }
                 .collect { result ->
                     _busEtaState.value = BusEtaUiState.Loading(false)
-                    when (result) {
-                        is BaseResult.Error -> _busEtaState.value =
-                            BusEtaUiState.Error(result.message)
-
-                        is BaseResult.Success -> _busEtaState.value =
-                            BusEtaUiState.Success(result.data)
+                    when(result) {
+                        is BaseResult.Error -> _busEtaState.value = BusEtaUiState.Error(result.message)
+                        is BaseResult.Success -> _busEtaState.value = BusEtaUiState.Success(result.data)
                     }
                 }
         }
@@ -124,10 +113,7 @@ class MapsViewModel(
 
     companion object {
         fun inject() = module {
-            viewModelOf(::MapsViewModel)
+            viewModelOf(::HomeViewModel)
         }
     }
 }
-
-
-

@@ -1,4 +1,4 @@
-package com.maou.busapp.presentation.maps.adapters
+package com.maou.busapp.presentation.home
 
 import android.location.Address
 import android.location.Geocoder

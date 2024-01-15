@@ -38,6 +38,9 @@ class RoutesViewModel(
     // for a meantime
     val usmLocation = LatLng(5.356001752593852, 100.30253648752455)
 
+    val origin = LatLng( 5.35500932, 100.30368619)
+    val destination =  LatLng( 5.35486374, 100.30033408)
+
 
     fun getAllRoutes() {
         viewModelScope.launch {

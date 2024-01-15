@@ -4,6 +4,7 @@ import android.app.Application
 import com.maou.busapp.di.bottomSheetHelper
 import com.maou.busapp.di.dataModule
 import com.maou.busapp.di.domainModule
+import com.maou.busapp.di.geoModule
 import com.maou.busapp.di.gpsHelper
 import com.maou.busapp.di.locationRequest
 import com.maou.busapp.di.permissionHelper
@@ -26,7 +27,8 @@ class BaseApplication: Application() {
                     gpsHelper,
                     dataModule,
                     locationRequest,
-                    domainModule
+                    domainModule,
+                    geoModule
                 )
             )
         }

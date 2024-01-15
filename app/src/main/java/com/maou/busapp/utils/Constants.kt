@@ -2,7 +2,7 @@ package com.maou.busapp.utils
 
 object Constants {
     object Country {
-        const val IDN = "IDN"
+        const val IDN = "ID"
         const val MY = "MY"
     }
 
