@@ -225,6 +225,7 @@ class HomeActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,
             tvAvailable.visibility = View.GONE
             rvStops.visibility = View.GONE
 
+
             shimmerAvailable.startShimmer()
             shimmerRvStops.startShimmer()
             shimmerState.startShimmer()
