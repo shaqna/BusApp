@@ -98,7 +98,7 @@ class RoutesActivity : AppCompatActivity() {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(viewModel.uskLocation, 14f))
 
             fetchBusStop()
-            //fetchRoutes()
+            fetchRoutes()
             fetchPredictionBusPath()
             observeBusStop()
             observeRoutes()

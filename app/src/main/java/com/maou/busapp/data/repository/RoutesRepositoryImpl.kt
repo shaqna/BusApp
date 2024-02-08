@@ -48,7 +48,7 @@ class RoutesRepositoryImpl(
     private fun getRoutes(): GeneralResponse<List<RoutesResponse>> {
         lateinit var jsonString: String
         try {
-            jsonString = context.assets.open("aceh_bus_routes.json")
+            jsonString = context.assets.open("usk_bus_routes.json")
                 .bufferedReader()
                 .use { it.readText() }
         } catch (ioException: IOException) {
