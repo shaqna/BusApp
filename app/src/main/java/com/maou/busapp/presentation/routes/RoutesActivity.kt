@@ -80,8 +80,6 @@ class RoutesActivity : AppCompatActivity() {
         loadKoinModules(RoutesViewModel.inject())
 
         busMarker?.remove()
-
-//        setButton()
         initMap()
     }
 
@@ -97,15 +95,14 @@ class RoutesActivity : AppCompatActivity() {
 
         mapFragment.getMapAsync { googleMap ->
             mMap = googleMap
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(viewModel.usmLocation, 14f))
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(viewModel.uskLocation, 14f))
 
             fetchBusStop()
-            fetchRoutes()
+            //fetchRoutes()
             fetchPredictionBusPath()
             observeBusStop()
             observeRoutes()
             observePredictionBusPath()
-
         }
     }
 
@@ -184,7 +181,7 @@ class RoutesActivity : AppCompatActivity() {
                 val sortedBusStop = state.data.sortedBy { it.busStopID }
                 Log.d("Sorted Bus Stop", sortedBusStop.toString())
                 showBusStopLocation(sortedBusStop)
-                //    drawRoute(viewModel.origin, viewModel.destination)
+                drawRoute(viewModel.origin, viewModel.destination)
             }
         }
 
@@ -198,22 +195,22 @@ class RoutesActivity : AppCompatActivity() {
                     .icon(iconToBitmap(this@RoutesActivity, R.drawable.ic_bus_stop))
             )
 
-            if (index != data.size-1) {
-                Log.d("Draw Routes is going", "going")
-                val origin = LatLng(busStop.latitude.toDouble(), busStop.latitude.toDouble())
-                val destination = LatLng(
-                    data[index + 1].latitude.toDouble(),
-                    data[index + 1].longitude.toDouble()
-                )
-                drawRoute(origin, destination)
-            } else {
-                val origin = LatLng(busStop.latitude.toDouble(), busStop.latitude.toDouble())
-                val destination = LatLng(
-                    data[0].latitude.toDouble(),
-                    data[0].longitude.toDouble()
-                )
-                drawRoute(origin, destination)
-            }
+//            if (index != data.size-1) {
+//                Log.d("Draw Routes is going", "going")
+//                val origin = LatLng(busStop.latitude.toDouble(), busStop.latitude.toDouble())
+//                val destination = LatLng(
+//                    data[index + 1].latitude.toDouble(),
+//                    data[index + 1].longitude.toDouble()
+//                )
+//                drawRoute(origin, destination)
+//            } else {
+//                val origin = LatLng(busStop.latitude.toDouble(), busStop.latitude.toDouble())
+//                val destination = LatLng(
+//                    data[0].latitude.toDouble(),
+//                    data[0].longitude.toDouble()
+//                )
+//                drawRoute(origin, destination)
+//            }
 
             marker?.let {
                 busStopMarkers.add(it)
@@ -225,8 +222,8 @@ class RoutesActivity : AppCompatActivity() {
 
         val request =
             BusStopListRequest(
-                country = Constants.Country.MY,
-                state = Constants.State.PULAU_PINANG
+                country = Constants.Country.IDN,
+                state = Constants.State.ACEH
             )
         viewModel.fetchBusStops(request)
     }
@@ -270,14 +267,9 @@ class RoutesActivity : AppCompatActivity() {
             mMap.addPolyline(PolylineOptions().addAll(pointList).color(Color.BLUE))
     }
 
-//    private fun setButton() {
-//        binding.floatingActionButton.setOnClickListener {
-//            startActivity(Intent(this@RoutesActivity, MapsActivity::class.java))
-//            finish()
-//        }
-//    }
 
     private fun drawRoute(origin: LatLng, destination: LatLng) {
+        Log.d("draw route", "called")
         val request = DirectionsApi.getDirections(
             geoApiContext,
             "${origin.latitude},${origin.longitude}",

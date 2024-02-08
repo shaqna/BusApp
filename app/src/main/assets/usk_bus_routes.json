@@ -1,0 +1,20 @@
+{
+  "statusCode": 200,
+  "body": [
+    {
+      "busStopPoint": [
+        {
+          "latitude": 5.554286,
+          "longitude": 95.318251
+        },
+        {
+          "latitude": 5.554286,
+          "longitude": 95.318251
+        }
+      ]
+    },
+    {
+      "busStopPoint": []
+    }
+  ]
+}
