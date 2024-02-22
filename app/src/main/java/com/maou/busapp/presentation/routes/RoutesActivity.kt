@@ -21,6 +21,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
+import com.google.gson.Gson
 import com.google.maps.DirectionsApi
 import com.google.maps.GeoApiContext
 import com.google.maps.model.DirectionsResult
@@ -31,6 +32,7 @@ import com.maou.busapp.data.source.request.BusStopListRequest
 import com.maou.busapp.data.source.request.PredictionBusPathRequest
 import com.maou.busapp.databinding.ActivityRoutesBinding
 import com.maou.busapp.domain.model.BusStop
+import com.maou.busapp.domain.model.Points
 import com.maou.busapp.presentation.maps.MapsActivity
 import com.maou.busapp.presentation.state.BusStopUiState
 import com.maou.busapp.presentation.state.PredictionBusPathUiState
@@ -56,7 +58,7 @@ class RoutesActivity : AppCompatActivity() {
     }
 
     private val geoApiContext: GeoApiContext by lazy {
-        GeoApiContext.Builder().apiKey(getString(R.string.api_key)).build()
+        GeoApiContext.Builder().apiKey(getString(R.string.lora_api_key)).build()
     }
 
     private val handler by lazy {
@@ -99,7 +101,7 @@ class RoutesActivity : AppCompatActivity() {
 
             fetchBusStop()
             fetchRoutes()
-            fetchPredictionBusPath()
+            //fetchPredictionBusPath()
             observeBusStop()
             observeRoutes()
             observePredictionBusPath()
@@ -181,7 +183,7 @@ class RoutesActivity : AppCompatActivity() {
                 val sortedBusStop = state.data.sortedBy { it.busStopID }
                 Log.d("Sorted Bus Stop", sortedBusStop.toString())
                 showBusStopLocation(sortedBusStop)
-                drawRoute(viewModel.origin, viewModel.destination)
+                //drawRoute(viewModel.origin, viewModel.destination)
             }
         }
 
@@ -276,6 +278,7 @@ class RoutesActivity : AppCompatActivity() {
             "${destination.latitude},${destination.longitude}"
         ).mode(TravelMode.DRIVING).transitMode(TransitMode.BUS)
 
+
         try {
             Log.d("draw route", "drawRoute: ")
 
@@ -286,11 +289,18 @@ class RoutesActivity : AppCompatActivity() {
             if (directionResult.routes.isNotEmpty()) {
                 val route = directionResult.routes[0].overviewPolyline.decodePath()
                 val routeLatLngList = route.map { LatLng(it.lat, it.lng) }
-                Log.d("List LatLng", routeLatLngList.toString())
+                val myPoints = arrayListOf<Points>()
+                routeLatLngList.forEach {
+                    val point = Points(it.latitude, it.longitude)
+                    myPoints.add(point)
+                }
+
+                val json = Gson().toJson(myPoints)
+                Log.d("List LatLng", json)
                 routePolyline?.remove()
 
                 routePolyline =
-                    mMap.addPolyline(PolylineOptions().addAll(routeLatLngList).color(Color.BLUE))
+                    mMap.addPolyline(PolylineOptions().addAll(routeLatLngList).color(Color.GREEN))
 
             }
         } catch (e: Exception) {

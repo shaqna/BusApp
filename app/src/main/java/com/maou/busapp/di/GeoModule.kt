@@ -9,7 +9,7 @@ import org.koin.dsl.module
 
 val geoModule = module {
     single {
-        GeoApiContext.Builder().apiKey(androidApplication().getString(R.string.api_key)).build()
+        GeoApiContext.Builder().apiKey(androidApplication().getString(R.string.lora_api_key)).build()
     }
 
     singleOf(::GoogleMapsService)

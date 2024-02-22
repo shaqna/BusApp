@@ -39,8 +39,8 @@ class RoutesViewModel(
     val usmLocation = LatLng(5.356001752593852, 100.30253648752455)
     val uskLocation = LatLng(5.570408134750771, 95.3697489110843)
 
-    val origin = LatLng( 5.559776, 95.317605)
-    val destination =  LatLng( 5.554201, 95.318301)
+    val origin = LatLng( 5.558645, 95.318940) // peunayong
+    val destination =  LatLng( 5.559794, 95.317631) // keudah
 
 
     fun getAllRoutes() {

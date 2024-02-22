@@ -100,7 +100,7 @@ class MapsActivity : AppCompatActivity(),
     }
 
     private val geoApiContext: GeoApiContext by lazy {
-        GeoApiContext.Builder().apiKey(getString(R.string.api_key)).build()
+        GeoApiContext.Builder().apiKey(getString(R.string.lora_api_key)).build()
     }
 
     private val shimmerView: ShimmerFrameLayout by lazy {
@@ -234,12 +234,9 @@ class MapsActivity : AppCompatActivity(),
 
             initMapCamera()
             requestLocationPermissions()
-
-            //setupBottomSheet()
             observeDeviceLocation()
             observeBusStop()
             //observeBusEta()
-            //setButton()
         }
     }
 
@@ -251,7 +248,6 @@ class MapsActivity : AppCompatActivity(),
             initPlaceHolderBottomSheet(binding)
             initDetailsBottomSheet(binding)
         }
-
     }
 
 
