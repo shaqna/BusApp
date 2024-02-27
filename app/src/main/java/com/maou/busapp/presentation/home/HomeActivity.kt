@@ -33,6 +33,7 @@ import com.maou.busapp.R
 import com.maou.busapp.data.source.request.BusStopListRequest
 import com.maou.busapp.databinding.ActivityHomeBinding
 import com.maou.busapp.presentation.maps.MapsActivity
+import com.maou.busapp.presentation.model.BusStopParcel
 import com.maou.busapp.presentation.routes.RoutesActivity
 import com.maou.busapp.presentation.state.BusStopUiState
 import com.maou.busapp.presentation.state.LocationUiState
@@ -72,7 +73,16 @@ class HomeActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,
                 val latLng = LatLng(it.latitude.toDouble(), it.longitude.toDouble())
                 viewModel.busStop = it
 
+                val busStopParcel = BusStopParcel(
+                    busStopID = it.busStopID,
+                    busStopName = it.busStopName,
+                    latitude = it.latitude,
+                    longitude = it.longitude,
+                    deviceID = it.deviceID
+                )
+
                 Intent(this@HomeActivity, RoutesActivity::class.java).also {intent ->
+                    intent.putExtra(RoutesActivity.NAME, busStopParcel)
                     startActivity(intent)
                 }
             }
