@@ -6,4 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface RoutesUseCase {
     fun getAllRoutes(): Flow<BaseResult<List<Routes>, String>>
+
+    fun getShelterRoutes(): Flow<BaseResult<List<Routes>, String>>
 }

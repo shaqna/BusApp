@@ -28,6 +28,10 @@ class RoutesViewModel(
         MutableStateFlow(RoutesUiState.Init)
     val routesState: StateFlow<RoutesUiState> get() = _routesState
 
+    private val _routesShelterState: MutableStateFlow<RoutesUiState> =
+        MutableStateFlow(RoutesUiState.Init)
+    val routesShelterState: StateFlow<RoutesUiState> get() = _routesShelterState
+
     private val _busStopState = MutableStateFlow<BusStopUiState>(BusStopUiState.Init)
     val busStopState: StateFlow<BusStopUiState> get() = _busStopState
 
@@ -39,8 +43,8 @@ class RoutesViewModel(
     val usmLocation = LatLng(5.356001752593852, 100.30253648752455)
     val uskLocation = LatLng(5.570408134750771, 95.3697489110843)
 
-    val origin = LatLng( 5.558645, 95.318940) // peunayong
-    val destination =  LatLng( 5.559794, 95.317631) // keudah
+    val origin = LatLng( 5.5749277,95.3674747)
+    val destination =  LatLng( 5.5792182, 95.3633109)
 
 
     fun getAllRoutes() {
@@ -60,6 +64,29 @@ class RoutesViewModel(
                             RoutesUiState.Error(result.message)
 
                         is BaseResult.Success -> _routesState.value =
+                            RoutesUiState.Success(result.data)
+                    }
+                }
+        }
+    }
+
+    fun getShelterRoutes() {
+        viewModelScope.launch {
+            routesUseCase.getShelterRoutes()
+                .onStart {
+                    _routesShelterState.value = RoutesUiState.Loading(true)
+                }
+                .catch { t ->
+                    _routesShelterState.value = RoutesUiState.Loading(false)
+                    _routesShelterState.value = RoutesUiState.Error(t.message.toString())
+                }
+                .collect { result ->
+                    _routesShelterState.value = RoutesUiState.Loading(false)
+                    when (result) {
+                        is BaseResult.Error -> _routesShelterState.value =
+                            RoutesUiState.Error(result.message)
+
+                        is BaseResult.Success -> _routesShelterState.value =
                             RoutesUiState.Success(result.data)
                     }
                 }

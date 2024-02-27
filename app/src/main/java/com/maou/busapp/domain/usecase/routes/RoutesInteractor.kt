@@ -9,4 +9,8 @@ class RoutesInteractor(private val repository: RoutesRepository): RoutesUseCase 
     override fun getAllRoutes(): Flow<BaseResult<List<Routes>, String>> {
         return repository.getAllRoutes()
     }
+
+    override fun getShelterRoutes(): Flow<BaseResult<List<Routes>, String>> {
+        return repository.getShelterRoutes()
+    }
 }

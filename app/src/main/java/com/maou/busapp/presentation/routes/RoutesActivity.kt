@@ -34,6 +34,7 @@ import com.maou.busapp.databinding.ActivityRoutesBinding
 import com.maou.busapp.domain.model.BusStop
 import com.maou.busapp.domain.model.Points
 import com.maou.busapp.presentation.maps.MapsActivity
+import com.maou.busapp.presentation.model.BusStopParcel
 import com.maou.busapp.presentation.state.BusStopUiState
 import com.maou.busapp.presentation.state.PredictionBusPathUiState
 import com.maou.busapp.presentation.state.RoutesUiState
@@ -48,6 +49,7 @@ import org.koin.core.context.loadKoinModules
 
 class RoutesActivity : AppCompatActivity() {
     private var routePolyline: Polyline? = null
+    private var routeShelterPolyLine: Polyline? = null
     private lateinit var mMap: GoogleMap
     private val busStopMarkers: MutableList<Marker> = mutableListOf()
     private val viewModel: RoutesViewModel by viewModel()
@@ -82,9 +84,26 @@ class RoutesActivity : AppCompatActivity() {
         loadKoinModules(RoutesViewModel.inject())
 
         busMarker?.remove()
+
+        initBusStopName()
         initMap()
     }
+    private fun initBusStopName() {
+        val busStop = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(NAME, BusStopParcel::class.java)
+        } else {
+            intent.getParcelableExtra(NAME)
+        }
 
+        with(binding) {
+            busIncomingLayout.tvBusName.text = busStop?.busStopName
+            title.text = busStop?.busStopName
+
+            backButton.setOnClickListener {
+                finish()
+            }
+        }
+    }
     private fun initMap() {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.mapRoutes) as SupportMapFragment
@@ -101,9 +120,11 @@ class RoutesActivity : AppCompatActivity() {
 
             fetchBusStop()
             fetchRoutes()
+            fetchShelterRoutes()
             //fetchPredictionBusPath()
             observeBusStop()
             observeRoutes()
+            observeShelterRoutes()
             observePredictionBusPath()
         }
     }
@@ -192,27 +213,14 @@ class RoutesActivity : AppCompatActivity() {
     private fun showBusStopLocation(data: List<BusStop>) {
         data.forEachIndexed { index, busStop ->
             val latLng = LatLng(busStop.latitude.toDouble(), busStop.longitude.toDouble())
+            val icon = if (busStop.busStopName.contains("shelter", ignoreCase = true))
+                R.drawable.ic_shelter
+            else
+                R.drawable.ic_bus_stop
             val marker = mMap.addMarker(
                 MarkerOptions().title(busStop.busStopName).position(latLng)
-                    .icon(iconToBitmap(this@RoutesActivity, R.drawable.ic_bus_stop))
+                    .icon(iconToBitmap(this@RoutesActivity, icon))
             )
-
-//            if (index != data.size-1) {
-//                Log.d("Draw Routes is going", "going")
-//                val origin = LatLng(busStop.latitude.toDouble(), busStop.latitude.toDouble())
-//                val destination = LatLng(
-//                    data[index + 1].latitude.toDouble(),
-//                    data[index + 1].longitude.toDouble()
-//                )
-//                drawRoute(origin, destination)
-//            } else {
-//                val origin = LatLng(busStop.latitude.toDouble(), busStop.latitude.toDouble())
-//                val destination = LatLng(
-//                    data[0].latitude.toDouble(),
-//                    data[0].longitude.toDouble()
-//                )
-//                drawRoute(origin, destination)
-//            }
 
             marker?.let {
                 busStopMarkers.add(it)
@@ -260,8 +268,43 @@ class RoutesActivity : AppCompatActivity() {
         }
     }
 
+
+    private fun observeShelterRoutes() {
+        viewModel.routesShelterState.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+            .onEach {
+                handleShelterRoutes(it)
+            }.launchIn(lifecycleScope)
+    }
+
+    private fun handleShelterRoutes(state: RoutesUiState) {
+        when (state) {
+            is RoutesUiState.Error -> {
+                Log.d("ShaqTagRoutes", state.message)
+            }
+
+            RoutesUiState.Init -> Unit
+            is RoutesUiState.Loading -> {}
+            is RoutesUiState.Success -> {
+                Log.d("ShaqTagRoutes", state.routes.toString())
+                Log.d("RoutesSize", state.routes.size.toString())
+                state.routes.forEach { route ->
+                    Log.d("RoutesPointSizePer1", route.points.size.toString())
+                    val latLngList = route.points.map { points ->
+                        LatLng(points.latitude, points.longitude)
+                    }
+                    drawShelterRoutes(latLngList)
+                }
+
+            }
+        }
+    }
+
     private fun fetchRoutes() {
         viewModel.getAllRoutes()
+    }
+
+    private fun fetchShelterRoutes() {
+        viewModel.getShelterRoutes()
     }
 
     private fun drawAllRoutes(pointList: List<LatLng>) {
@@ -269,6 +312,10 @@ class RoutesActivity : AppCompatActivity() {
             mMap.addPolyline(PolylineOptions().addAll(pointList).color(Color.BLUE))
     }
 
+    private fun drawShelterRoutes(pointList: List<LatLng>) {
+        routeShelterPolyLine =
+            mMap.addPolyline(PolylineOptions().addAll(pointList).color(Color.GREEN))
+    }
 
     private fun drawRoute(origin: LatLng, destination: LatLng) {
         Log.d("draw route", "called")

@@ -36,6 +36,18 @@ class RoutesRepositoryImpl(
         }.flowOn(Dispatchers.IO)
     }
 
+    override fun getShelterRoutes(): Flow<BaseResult<List<Routes>, String>> {
+        return flow {
+            val response = getRoutesShelter()
+            if (response.statusCode != 200) {
+                emit(BaseResult.Error("Error"))
+            }
+            emit(BaseResult.Success(response.body.toListModel()))
+        }.catch { e ->
+            emit(BaseResult.Error(e.message.toString()))
+        }.flowOn(Dispatchers.IO)
+    }
+
     override fun getDirections(
         origin: LatLng,
         destination: LatLng
@@ -49,6 +61,19 @@ class RoutesRepositoryImpl(
         lateinit var jsonString: String
         try {
             jsonString = context.assets.open("usk_bus_routes.json")
+                .bufferedReader()
+                .use { it.readText() }
+        } catch (ioException: IOException) {
+            Log.d("Error", ioException.message.toString())
+        }
+        val response = object : TypeToken<GeneralResponse<List<RoutesResponse>>>() {}.type
+        return Gson().fromJson(jsonString, response)
+    }
+
+    private fun getRoutesShelter(): GeneralResponse<List<RoutesResponse>> {
+        lateinit var jsonString: String
+        try {
+            jsonString = context.assets.open("usk_shelter_routes.json")
                 .bufferedReader()
                 .use { it.readText() }
         } catch (ioException: IOException) {
