@@ -145,7 +145,8 @@ class MapsActivity : AppCompatActivity(),
                     tvLastUpdateTime.visibility = View.VISIBLE
                     imgPrevBusStop.visibility = View.VISIBLE
                     tvPrevBusStop.text = it.currStopName
-                    tvArrival.text = StringUtils.generateText("Status: Arrive in ${convertTimeToStringMinute(it.etaToCurrStop)} minutes")
+                    tvArrival.text =
+                        StringUtils.generateText("Status: Arrive in ${convertTimeToStringMinute(it.etaToCurrStop)} minutes")
                 } else {
                     tvPrevBusStop.visibility = View.GONE
                     tvLastUpdateTime.visibility = View.GONE
@@ -249,7 +250,6 @@ class MapsActivity : AppCompatActivity(),
             initDetailsBottomSheet(binding)
         }
     }
-
 
 
     private fun requestBusStopByState() {
@@ -536,9 +536,14 @@ class MapsActivity : AppCompatActivity(),
     private fun showBusStopLocation(data: List<BusStop>) {
         data.forEach { busStop: BusStop ->
             val latLng = LatLng(busStop.latitude.toDouble(), busStop.longitude.toDouble())
+            val icon = if (busStop.busStopName.contains("shelter", ignoreCase = true))
+                R.drawable.ic_shelter
+            else
+                R.drawable.ic_bus_stop
+
             val marker = mMap.addMarker(
                 MarkerOptions().title(busStop.busStopName).position(latLng)
-                    .icon(iconToBitmap(this@MapsActivity, R.drawable.ic_bus_stop))
+                    .icon(iconToBitmap(this@MapsActivity, icon))
             )
 
             marker?.let {
@@ -562,7 +567,7 @@ class MapsActivity : AppCompatActivity(),
             }
 
             is LocationUiState.OnLocationResult -> {
-                state.location?.let {currentLocation ->
+                state.location?.let { currentLocation ->
                     bottomSheetHelper.setPlaceHolderSheetVisibility(Visibility.GONE)
                     bottomSheetHelper.setLocationSheetVisibility(Visibility.VISIBLE)
                     bottomSheetHelper.locBottomSheetBehavior.apply {

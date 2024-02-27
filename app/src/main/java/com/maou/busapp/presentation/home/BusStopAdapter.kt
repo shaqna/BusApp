@@ -1,12 +1,16 @@
 package com.maou.busapp.presentation.home
 
+import android.graphics.drawable.Drawable
 import android.location.Address
 import android.location.Geocoder
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.gms.maps.model.LatLng
+import com.maou.busapp.R
 import com.maou.busapp.databinding.BusStopItemBinding
 import com.maou.busapp.domain.model.BusStop
 import java.util.Locale
@@ -56,6 +60,12 @@ class BusStopAdapter : RecyclerView.Adapter<BusStopAdapter.BusStopViewHolder>() 
                     )
                 )
 
+                if(busStop.busStopName.contains("shelter", ignoreCase = true)) {
+                    setIcon(R.drawable.ic_shelter, icBusStop)
+                } else {
+                    setIcon(R.drawable.ic_bus_stop, icBusStop)
+                }
+
             }
 
             itemView.setOnClickListener {
@@ -79,6 +89,10 @@ class BusStopAdapter : RecyclerView.Adapter<BusStopAdapter.BusStopViewHolder>() 
             }
 
             return address?.getAddressLine(0)
+        }
+
+        private fun setIcon(icon: Int, target: ImageView) {
+            Glide.with(itemView.context).load(icon).into(target)
         }
     }
 

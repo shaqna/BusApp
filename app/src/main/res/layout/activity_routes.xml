@@ -5,6 +5,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/primaryColor"
+            android:minHeight="?attr/actionBarSize">
+
+            <ImageButton
+
+                android:id="@+id/backButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@color/white"
+                android:src="@drawable/baseline_arrow_back_24" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="Halte 123" />
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mapRoutes"
@@ -13,7 +50,108 @@
         android:layout_height="400dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBar"
         tools:context=".presentation.MapsActivity" />
+
+    <include
+        android:id="@+id/busIncomingLayout"
+        layout="@layout/bus_incoming_item"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mapRoutes" />
+
+    <ImageButton
+        android:id="@+id/imgDestinationBusStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="@+id/busIncomingLayout"
+        app:layout_constraintTop_toBottomOf="@+id/busIncomingLayout"
+        app:srcCompat="@drawable/current_location" />
+
+    <TextView
+        android:id="@+id/tvCurrentBusStopName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="32dp"
+        android:text="BHEPA"
+        android:textColor="@color/primaryColor"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imgDestinationBusStop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgDestinationBusStop"
+        app:layout_constraintTop_toTopOf="@+id/imgDestinationBusStop" />
+
+    <TextView
+        android:id="@+id/tvBusCarPlate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="PGB5641"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="@+id/tvCurrentBusStopName"
+        app:layout_constraintStart_toStartOf="@+id/tvCurrentBusStopName"
+        app:layout_constraintTop_toBottomOf="@+id/tvCurrentBusStopName" />
+
+    <TextView
+        android:id="@+id/tvArrival"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Arrive in 10 minutes"
+        app:layout_constraintEnd_toEndOf="@+id/tvBusCarPlate"
+        app:layout_constraintStart_toStartOf="@+id/tvBusCarPlate"
+        app:layout_constraintTop_toBottomOf="@+id/tvBusCarPlate" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="2dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/primaryColor"
+        app:layout_constraintEnd_toEndOf="@+id/imgDestinationBusStop"
+        app:layout_constraintStart_toStartOf="@+id/imgDestinationBusStop"
+        app:layout_constraintTop_toBottomOf="@+id/imgDestinationBusStop" />
+
+    <ImageButton
+        android:id="@+id/imgPrevBusStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="@+id/imgDestinationBusStop"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:srcCompat="@drawable/prev_location" />
+
+    <TextView
+        android:id="@+id/tvPrevBusStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DKSK"
+        android:textColor="@color/grey"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imgPrevBusStop"
+        app:layout_constraintStart_toStartOf="@+id/tvCurrentBusStopName"
+        app:layout_constraintTop_toTopOf="@+id/imgPrevBusStop" />
+
+    <TextView
+        android:id="@+id/tvLastUpdateTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="17:30 WIB"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvPrevBusStop"
+        app:layout_constraintEnd_toEndOf="@+id/tvArrival"
+        app:layout_constraintTop_toTopOf="@+id/tvPrevBusStop" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
